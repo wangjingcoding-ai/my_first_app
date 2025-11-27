@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_first_app/services/auth_service.dart';
+import 'package:alterego/services/auth_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:alterego/l10n/app_localizations.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -51,8 +52,9 @@ class _HomePageState extends State<HomePage> {
         updatedAtStr = rawUpdated;
       }
     }
+    final t = AppLocalizations.of(context);
     return Scaffold(
-      appBar: AppBar(title: const Text('Home')),
+      appBar: AppBar(title: Text(t?.navHome ?? 'Home')),
       body: _loading
           ? const Center(child: CircularProgressIndicator())
           : Padding(

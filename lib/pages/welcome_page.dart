@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_first_app/services/auth_service.dart';
+import 'package:alterego/services/auth_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:alterego/l10n/app_localizations.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -54,8 +55,9 @@ class _WelcomePageState extends State<WelcomePage> {
         updatedAtStr = rawUpdated;
       }
     }
+    final t = AppLocalizations.of(context);
     return Scaffold(
-      appBar: AppBar(title: const Text('欢迎')),
+      appBar: AppBar(title: Text(t?.welcomeTitle ?? '欢迎')),
       body: _loading
           ? const Center(child: CircularProgressIndicator())
           : Padding(
@@ -63,7 +65,7 @@ class _WelcomePageState extends State<WelcomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('欢迎回来'),
+                  Text(t?.welcomeBack ?? '欢迎回来'),
                   const SizedBox(height: 8),
                   Text('Email: $userEmail'),
                   const SizedBox(height: 8),
@@ -75,7 +77,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   const SizedBox(height: 24),
                   ElevatedButton(
                     onPressed: () => Navigator.pushReplacementNamed(context, '/'),
-                    child: const Text('进入主页'),
+                    child: Text(t?.enterHome ?? '进入主页'),
                   ),
                   if (_error != null) ...[
                     const SizedBox(height: 12),

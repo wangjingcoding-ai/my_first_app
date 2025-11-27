@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:alterego/l10n/app_localizations.dart';
 
 class RecommendTab extends StatelessWidget {
   const RecommendTab({super.key});
@@ -11,9 +12,10 @@ class RecommendTab extends StatelessWidget {
       {'title': '新秀观察', 'desc': '本赛季潜力新星表现'},
       {'title': '季后赛前瞻', 'desc': '强队走势与对位分析'},
     ];
+    final t = AppLocalizations.of(context);
     return CustomScrollView(
       slivers: [
-        SliverAppBar(title: const Text('推荐'), pinned: true, floating: true),
+        SliverAppBar(title: Text(t?.navRecommend ?? '推荐'), pinned: true, floating: true),
         SliverPadding(
           padding: const EdgeInsets.all(12),
           sliver: SliverList(

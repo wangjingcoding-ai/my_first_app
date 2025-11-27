@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_first_app/services/auth_service.dart';
+import 'package:alterego/services/auth_service.dart';
 
 class ProfileSetupPage extends StatefulWidget {
   const ProfileSetupPage({super.key});

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_first_app/services/auth_service.dart';
+import 'package:alterego/services/auth_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:alterego/l10n/app_localizations.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -71,6 +72,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final t = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(title: const Text('登录')),
       body: Padding(
@@ -92,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _loading ? null : _login,
-              child: _loading ? const SizedBox(height: 16, width: 16, child: CircularProgressIndicator(strokeWidth: 2)) : const Text('登录'),
+              child: _loading ? const SizedBox(height: 16, width: 16, child: CircularProgressIndicator(strokeWidth: 2)) : Text(t?.loginTitle ?? '登录'),
             ),
             if (_error != null) ...[
               const SizedBox(height: 12),
@@ -101,11 +103,11 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(height: 12),
             TextButton(
               onPressed: () => Navigator.pushReplacementNamed(context, '/register'),
-              child: const Text('没有账号？去注册'),
+              child: Text(t?.noAccountGoRegister ?? '没有账号？去注册'),
             ),
             TextButton(
               onPressed: () => Navigator.pushReplacementNamed(context, '/forgot-password'),
-              child: const Text('忘记密码？'),
+              child: Text(t?.forgotTitle ?? '忘记密码'),
             ),
           ],
         ),

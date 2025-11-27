@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_first_app/services/auth_service.dart';
+import 'package:alterego/services/auth_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:alterego/l10n/app_localizations.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -49,6 +50,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    final t = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(title: const Text('注册')),
       body: Padding(
@@ -70,7 +72,7 @@ class _RegisterPageState extends State<RegisterPage> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _loading ? null : _register,
-              child: _loading ? const SizedBox(height: 16, width: 16, child: CircularProgressIndicator(strokeWidth: 2)) : const Text('Sign Up'),
+              child: _loading ? const SizedBox(height: 16, width: 16, child: CircularProgressIndicator(strokeWidth: 2)) : Text(t?.registerTitle ?? 'Sign Up'),
             ),
             if (_error != null) ...[
               const SizedBox(height: 12),
@@ -79,7 +81,7 @@ class _RegisterPageState extends State<RegisterPage> {
             const SizedBox(height: 12),
             TextButton(
               onPressed: () => Navigator.pushReplacementNamed(context, '/login'),
-              child: const Text('返回登录'),
+              child: Text(t?.backToLogin ?? '返回登录'),
             ),
           ],
         ),

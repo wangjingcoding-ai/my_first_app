@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_first_app/services/auth_service.dart';
+import 'package:alterego/services/auth_service.dart';
+import 'package:provider/provider.dart';
+import 'package:alterego/providers/locale_provider.dart';
+import 'package:alterego/l10n/app_localizations.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class MineTab extends StatefulWidget {
@@ -47,44 +50,75 @@ class _MineTabState extends State<MineTab> {
 
   @override
   Widget build(BuildContext context) {
+    final t = AppLocalizations.of(context);
     final session = Supabase.instance.client.auth.currentSession;
     if (_loading) {
       return const Center(child: CircularProgressIndicator());
     }
     if (session == null) {
-      return Padding(
+      return ListView(
         padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text('我的'),
-            const SizedBox(height: 12),
-            const Text('登录以查看你的资料与偏好设置'),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => Navigator.pushReplacementNamed(context, '/login'),
-              child: const Text('去登录'),
-            ),
-          ],
-        ),
+        children: [
+          Text(t?.myTabTitle ?? 'My'),
+          const SizedBox(height: 12),
+          const Text('登录以查看你的资料与偏好设置'),
+          const SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () => Navigator.pushReplacementNamed(context, '/login'),
+            child: Text(t?.login ?? 'Login'),
+          ),
+          const SizedBox(height: 24),
+          Text(t?.settings ?? 'Settings', style: Theme.of(context).textTheme.titleMedium),
+          const SizedBox(height: 12),
+          Consumer<LocaleProvider>(builder: (context, lp, _) {
+            return ListTile(
+              title: Text(t?.language ?? 'Language'),
+              trailing: DropdownButton<Locale>(
+                value: lp.locale,
+                items: const [
+                  DropdownMenuItem(value: Locale('en'), child: Text('English')),
+                  DropdownMenuItem(value: Locale('zh'), child: Text('中文')),
+                ],
+                onChanged: (loc) {
+                  if (loc != null) lp.setLocale(loc);
+                },
+              ),
+            );
+          }),
+        ],
       );
     }
     final email = Supabase.instance.client.auth.currentUser?.email ?? '';
     final username = _profile?['username']?.toString() ?? '';
-    return Padding(
+    return ListView(
       padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text('我的'),
-          const SizedBox(height: 12),
-          Text('Email: $email'),
-          const SizedBox(height: 8),
-          Text('Username: $username'),
-          const SizedBox(height: 20),
-          ElevatedButton(onPressed: _signOut, child: const Text('退出登录')),
-        ],
-      ),
+      children: [
+        Text(t?.myTabTitle ?? 'My'),
+        const SizedBox(height: 12),
+        Text('Email: $email'),
+        const SizedBox(height: 8),
+        Text('Username: $username'),
+        const SizedBox(height: 20),
+        ElevatedButton(onPressed: _signOut, child: Text(t?.logout ?? 'Logout')),
+        const SizedBox(height: 24),
+        Text(t?.settings ?? 'Settings', style: Theme.of(context).textTheme.titleMedium),
+        const SizedBox(height: 12),
+        Consumer<LocaleProvider>(builder: (context, lp, _) {
+          return ListTile(
+            title: Text(t?.language ?? 'Language'),
+            trailing: DropdownButton<Locale>(
+              value: lp.locale,
+              items: const [
+                DropdownMenuItem(value: Locale('en'), child: Text('English')),
+                DropdownMenuItem(value: Locale('zh'), child: Text('中文')),
+              ],
+              onChanged: (loc) {
+                if (loc != null) lp.setLocale(loc);
+              },
+            ),
+          );
+        }),
+      ],
     );
   }
 }

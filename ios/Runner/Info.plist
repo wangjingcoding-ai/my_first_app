@@ -4,16 +4,16 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
-	<key>CFBundleDisplayName</key>
-	<string>My First App</string>
+    <key>CFBundleDisplayName</key>
+    <string>AlterEgo</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
-	<key>CFBundleName</key>
-	<string>my_first_app</string>
+    <key>CFBundleName</key>
+    <string>AlterEgo</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -43,7 +43,36 @@
 	</array>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
-	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
+  <key>UIApplicationSupportsIndirectInputEvents</key>
+  <true/>
+  <key>NSAppTransportSecurity</key>
+  <dict>
+    <key>NSAllowsArbitraryLoads</key>
+    <true/>
+    <key>NSExceptionDomains</key>
+    <dict>
+      <key>localhost</key>
+      <dict>
+        <key>NSExceptionAllowsInsecureHTTPLoads</key>
+        <true/>
+        <key>NSIncludesSubdomains</key>
+        <true/>
+      </dict>
+      <key>127.0.0.1</key>
+      <dict>
+        <key>NSExceptionAllowsInsecureHTTPLoads</key>
+        <true/>
+        <key>NSIncludesSubdomains</key>
+        <true/>
+      </dict>
+      <key>10.0.2.2</key>
+      <dict>
+        <key>NSExceptionAllowsInsecureHTTPLoads</key>
+        <true/>
+        <key>NSIncludesSubdomains</key>
+        <true/>
+      </dict>
+    </dict>
+  </dict>
 </dict>
 </plist>

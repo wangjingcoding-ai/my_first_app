@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_first_app/services/auth_service.dart';
+import 'package:alterego/services/auth_service.dart';
+import 'package:alterego/l10n/app_localizations.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});
@@ -41,6 +42,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
   @override
   Widget build(BuildContext context) {
+    final t = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(title: const Text('忘记密码')),
       body: Padding(
@@ -56,14 +58,14 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _loading ? null : _sendReset,
-              child: _loading ? const SizedBox(height: 16, width: 16, child: CircularProgressIndicator(strokeWidth: 2)) : const Text('发送重置邮件'),
+              child: _loading ? const SizedBox(height: 16, width: 16, child: CircularProgressIndicator(strokeWidth: 2)) : Text(t?.sendResetEmail ?? '发送重置邮件'),
             ),
             const SizedBox(height: 12),
             if (_error != null) Text(_error!, style: const TextStyle(color: Colors.red)),
             const SizedBox(height: 12),
             TextButton(
               onPressed: () => Navigator.pushReplacementNamed(context, '/login'),
-              child: const Text('返回登录'),
+              child: Text(t?.backToLogin ?? '返回登录'),
             ),
           ],
         ),

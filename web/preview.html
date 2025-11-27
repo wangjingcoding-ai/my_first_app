@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AlterEgo UI Preview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0F111A;
+      --blue: #141E8C;
+      --purple: #9D29EA;
+      --glass: rgba(255,255,255,0.05);
+      --border: rgba(255,255,255,0.12);
+      --accent: #00F5FF;
+    }
+    html, body { height: 100%; }
+    body {
+      margin: 0; background: var(--bg); color: #fff; font-family: 'Exo 2', sans-serif; overflow: hidden;
+    }
+    .scene { position: relative; width: 100vw; height: 100vh; }
+    .glow { position: absolute; filter: blur(120px); border-radius: 50%; }
+    .glow.top { width: 280px; height: 280px; top: -120px; left: -60px;
+      background: radial-gradient(circle at 30% 30%, var(--blue), var(--purple)); }
+    .glow.bottom { width: 340px; height: 340px; bottom: -140px; right: -80px;
+      background: radial-gradient(circle at 70% 70%, var(--purple), var(--blue)); }
+    .wrap { position: absolute; inset: 0; padding: 16px; box-sizing: border-box; }
+    .topbar { display:flex; align-items:center; }
+    .title { font-size: 24px; font-weight: 700; background: linear-gradient(90deg, var(--blue), var(--purple)); -webkit-background-clip: text; color: transparent; }
+    .spacer { flex: 1; }
+    .avatar { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.12); display:flex; align-items:center; justify-content:center; }
+    .featured { position: absolute; left: 16px; right: 16px; top: 70px; bottom: 84px; border-radius: 24px; overflow: hidden; }
+    .featured .image { position: absolute; inset: 0; background: #000; display:flex; align-items:center; justify-content:center; }
+    .featured .image::after { content:""; position:absolute; inset:0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.67)); }
+    .featured .bar { position: absolute; left:16px; right:16px; bottom:16px; border-radius:20px;
+      backdrop-filter: blur(12px); background: var(--glass); border: 1px solid var(--border);
+      padding: 16px; display:flex; align-items:center; }
+    .featured .texts { flex:1; }
+    .featured .title { font-size:20px; font-weight:700; }
+    .featured .subtitle { color: rgba(255,255,255,0.7); margin-top:6px; }
+    .alter-btn { padding:12px 18px; border-radius:30px; background: linear-gradient(135deg, var(--blue), var(--purple));
+      box-shadow: 0 6px 20px rgba(0,245,255,0.33); font-weight:700; }
+    .bottomnav { position:absolute; left:16px; right:16px; bottom:16px; height:56px; border-radius:16px;
+      backdrop-filter: blur(12px); background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+      display:flex; align-items:center; justify-content:space-around; }
+    .icon { opacity: 0.7; }
+    .icon.active { opacity: 1; }
+    .stripes { position:absolute; right:12px; top:100px; display:flex; flex-direction:column; gap:8px; }
+    .stripe { height:10px; border-radius:8px; filter: blur(6px); }
+  </style>
+</head>
+<body>
+  <div class="scene">
+    <div class="glow top"></div>
+    <div class="glow bottom"></div>
+    <div class="wrap">
+      <div class="topbar">
+        <div class="title">AlterEgo</div>
+        <div class="spacer"></div>
+        <div class="avatar">👤</div>
+      </div>
+      <div class="stripes">
+        <div class="stripe" style="width:80px; background: linear-gradient(90deg, var(--blue), var(--purple));"></div>
+        <div class="stripe" style="width:72px; background: linear-gradient(90deg, var(--blue), var(--purple));"></div>
+        <div class="stripe" style="width:64px; background: linear-gradient(90deg, var(--blue), var(--purple));"></div>
+      </div>
+      <div class="featured">
+        <div class="image">🖼️</div>
+        <div class="bar">
+          <div class="texts">
+            <div class="title">赛博赏金猎人</div>
+            <div class="subtitle">在霓虹之城开启你的旅程</div>
+          </div>
+          <div class="alter-btn">开始旅程</div>
+        </div>
+      </div>
+      <div class="bottomnav">
+        <div class="icon active">🏠</div>
+        <div class="icon">⭐</div>
+        <div class="icon">👤</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
